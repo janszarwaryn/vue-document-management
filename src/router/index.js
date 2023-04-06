@@ -1,25 +1,29 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import DocumentList from '../components/DocumentList.vue';
-import RecycleBin from '../components/RecycleBin.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import HomeView from '../views/HomeView.vue'
 
-Vue.use(Router);
+Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'DocumentList',
-    component: DocumentList
+    name: 'home',
+    component: HomeView
   },
   {
-    path: '/recycle-bin',
-    name: 'RecycleBin',
-    component: RecycleBin
+    path: '/about',
+    name: 'about',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   }
-];
+]
 
-const router = new Router({
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+export default router
