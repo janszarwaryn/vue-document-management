@@ -24,7 +24,7 @@
         <v-list>
             <v-list-item v-for="document in documents" :key="document.id">
                 <v-list-item-title>{{ document.title }}</v-list-item-title> <!-- Użyj 'title', a nie 'name' -->
-                <v-list-item-subtitle>{{ document.creationDate }}</v-list-item-subtitle> <!-- Dodaj tę linię -->
+                <v-list-item-subtitle>{{ document.date }}</v-list-item-subtitle> <!-- Dodaj tę linię -->
                 <v-list-item-action>
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">

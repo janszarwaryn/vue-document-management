@@ -22,7 +22,7 @@
         </v-toolbar>
         <v-list>
             <v-list-item v-for="document in recycledDocuments" :key="document.id">
-                <v-list-item-title>{{ document.name }}</v-list-item-title>
+                <v-list-item-title>{{ document.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ document.date }}</v-list-item-subtitle>
                 <v-list-item-action>
                     <v-tooltip bottom>

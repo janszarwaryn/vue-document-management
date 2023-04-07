@@ -35,7 +35,7 @@ export default {
     computed: {
         ...mapState(['documents', 'recycledDocuments']),
         sortedDocuments() {
-            return this.$store.state.documents
+            return this.documents
                 .filter((document) => document && document.title)
                 .sort((a, b) => {
                     if (!a.title || !b.title) {
@@ -47,13 +47,11 @@ export default {
     },
     methods: {
         ...mapActions([
+            'addDocument',
             'deleteDocument',
             'restoreDocument',
             'emptyRecycleBin',
         ]),
-        addDocument(newDocument) {
-            this.documents.push(newDocument);
-        },
         openConfirmationDialog(documentId) {
             this.dialog = true;
             this.selectedDocumentId = documentId;

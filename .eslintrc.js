@@ -21,6 +21,7 @@ module.exports = {
         'no-param-reassign': ['error', { 'props': false }],
         'indent': 'off',
         "quotes": "off",
+        "object-curly-newline": "off",
     },
     settings: {
         'import/resolver': {
