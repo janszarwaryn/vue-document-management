@@ -25,15 +25,15 @@ async function fetchDocuments() {
 }
 
 async function fetchRecycledDocuments() {
-  // Pobierz usunięte dokumenty z API
+  // pobiera usunięte dokumenty z API
   return [
     { id: 3, title: "Recycled Document 1", content: "Content of recycled document 1", date: "2023-04-05 08:42:37" },
   ];
 }
 
 async function addDocumentToAPI(document, numberOfDocuments) {
-  // Dodaj dokument do API i zaktualizuj dane w odpowiedni sposób
-  // Zwróć dodany dokument
+  // dodaje dokument do API i zaktualizuj dane w odpowiedni dsposob..
+  // zwraca dodany dokument
   return {
     ...document,
     title: `Document ${numberOfDocuments + 1}`,

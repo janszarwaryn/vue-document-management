@@ -1,5 +1,6 @@
 
-# vue-document-menager
+# vue-document-management
+
 # Project Goal
 
 The goal of the project is to create a document management system that allows for easy browsing, adding, deleting, and modifying documents.

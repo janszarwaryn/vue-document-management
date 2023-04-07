@@ -85,7 +85,6 @@ export default {
         };
     },
     mounted() {
-        // Save data to localStorage on every change
         window.addEventListener('beforeunload', () => {
             localStorage.setItem('documents', JSON.stringify(this.documents));
             localStorage.setItem(
@@ -95,7 +94,6 @@ export default {
         });
     },
     created() {
-        // Read data from localStorage and update the data state in the app
         const documents = localStorage.getItem('documents');
         const recycledDocuments = localStorage.getItem('recycledDocuments');
         if (documents) {

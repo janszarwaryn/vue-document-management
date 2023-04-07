@@ -23,9 +23,8 @@
         </v-toolbar>
         <v-list>
             <v-list-item v-for="document in documents" :key="document.id">
-                <v-list-item-title>{{ document.title }}</v-list-item-title> <!-- Użyj 'title', a nie 'name' -->
-                <v-list-item-subtitle>{{ document.date }}</v-list-item-subtitle> <!-- Dodaj tę linię -->
-                <v-list-item-action>
+                <v-list-item-title>{{ document.title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ document.date }}</v-list-item-subtitle>
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn v-bind="attrs" v-on="on" icon @click="deleteDocument(document.id)">
@@ -49,7 +48,7 @@ export default {
             const newDocument = {
                 id: Date.now(),
                 title: "New Document",
-                creationDate: new Date().toLocaleString(), // Użyj toLocaleString() zamiast toLocaleDateString()
+                creationDate: new Date().toLocaleString(),
             };
             this.$emit("add-document", newDocument);
         },
