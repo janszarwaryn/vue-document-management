@@ -1,46 +1,97 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="UFPA Logo"
-          class="shrink mr-2"
-          contain
-          :src="require('@/assets/brasao_ufpa.png')"
-          transition="scale-transition"
-          width="40"
+    <v-app>
+        <v-app-bar app color="primary" dark>
+            <v-toolbar-title>Document Management Manager</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn text to="/">Main</v-btn>
+            <v-btn text to="/recycle-bin">Document basket</v-btn>
+        </v-app-bar>
+        <v-main>
+            <router-view
+                :documents="sortedDocuments"
+                :recycled-documents="recycledDocuments"
+                @add-document="addDocument"
+                @delete-document="openConfirmationDialog"
+                @restore-document="restoreDocument"
+                @empty-recycle-bin="emptyRecycleBin"
+            />
+        </v-main>
+        <ConfirmationDialog
+            v-model="dialog"
+            @confirm="confirmDeleteDocument"
+            @cancel="cancelDeleteDocument"
         />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://ppgeaa.propesp.ufpa.br/index.php/br/"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">PPGEAA - UFPA</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view/>
-    </v-main>
-  </v-app>
+    </v-app>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+import ConfirmationDialog from './components/ConfirmationDialog.vue';
 
 export default {
-  name: 'AppApp',
-
-  data: () => ({
-    //
-  }),
+    components: {
+        ConfirmationDialog,
+    },
+    computed: {
+        ...mapState(['documents', 'recycledDocuments']),
+        sortedDocuments() {
+            return this.$store.state.documents
+                .filter((document) => document && document.title)
+                .sort((a, b) => {
+                    if (!a.title || !b.title) {
+                        return 0;
+                    }
+                    return a.title.localeCompare(b.title);
+                });
+        },
+    },
+    methods: {
+        ...mapActions([
+            'deleteDocument',
+            'restoreDocument',
+            'emptyRecycleBin',
+        ]),
+        addDocument(newDocument) {
+            this.documents.push(newDocument);
+        },
+        openConfirmationDialog(documentId) {
+            this.dialog = true;
+            this.selectedDocumentId = documentId;
+        },
+        confirmDeleteDocument() {
+            this.deleteDocument(this.selectedDocumentId);
+            this.dialog = false;
+        },
+        cancelDeleteDocument() {
+            this.dialog = false;
+        },
+    },
+    data() {
+        return {
+            dialog: false,
+            selectedDocumentId: null,
+        };
+    },
+    mounted() {
+        // Save data to localStorage on every change
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('documents', JSON.stringify(this.documents));
+            localStorage.setItem(
+                'recycledDocuments',
+                JSON.stringify(this.recycledDocuments),
+            );
+        });
+    },
+    created() {
+        // Read data from localStorage and update the data state in the app
+        const documents = localStorage.getItem('documents');
+        const recycledDocuments = localStorage.getItem('recycledDocuments');
+        if (documents) {
+            this.$store.commit('setDocuments', JSON.parse(documents));
+        }
+        if (recycledDocuments) {
+            this.$store.commit('setRecycledDocuments', JSON.parse(recycledDocuments));
+        }
+    },
 };
 </script>

@@ -1,20 +1,32 @@
 module.exports = {
-    "root": false,
-    "env": {
-        "browser": true,
-        "es2021": true
+    root: true,
+    env: {
+        node: true,
+        browser: true,
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:vue/essential"
+    extends: [
+        'plugin:vue/essential',
+        'airbnb-base',
     ],
-    "parserOptions": {
-        "ecmaVersion": 12,
-        "sourceType": "module"
+    parserOptions: {
+        parser: 'babel-eslint',
+        ecmaVersion: 2020,
+        sourceType: 'module',
     },
-    "plugins": [
-        "vue"
-    ],
-    "rules": {
-    }
+    rules: {
+        'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'import/no-extraneous-dependencies': ['error', { 'devDependencies': true }],
+        'max-len': ['error', { 'code': 150 }],
+        'no-param-reassign': ['error', { 'props': false }],
+        'indent': 'off',
+        "quotes": "off",
+    },
+    settings: {
+        'import/resolver': {
+            node: {
+                extensions: ['.js', '.vue'],
+            },
+        },
+    },
 };

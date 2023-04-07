@@ -9,7 +9,7 @@
                         <v-icon>mdi-plus</v-icon>
                     </v-btn>
                 </template>
-                <span>Dodaj Nowy</span>
+                <span>Add New</span>
             </v-tooltip>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
@@ -17,14 +17,14 @@
                         <v-icon>mdi-delete</v-icon>
                     </v-btn>
                 </template>
-                <span>Przejdź do Kosza</span>
+                <span>Go to Trash</span>
             </v-tooltip>
 
         </v-toolbar>
         <v-list>
             <v-list-item v-for="document in documents" :key="document.id">
-                <v-list-item-title>{{ document.name }}</v-list-item-title>
-                <v-list-item-subtitle>{{ document.date }}</v-list-item-subtitle>
+                <v-list-item-title>{{ document.title }}</v-list-item-title> <!-- Użyj 'title', a nie 'name' -->
+                <v-list-item-subtitle>{{ document.creationDate }}</v-list-item-subtitle> <!-- Dodaj tę linię -->
                 <v-list-item-action>
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
@@ -32,7 +32,7 @@
                                 <v-icon>mdi-minus</v-icon>
                             </v-btn>
                         </template>
-                        <span>Usuń Dokument</span>
+                        <span>Delete Document</span>
                     </v-tooltip>
                 </v-list-item-action>
             </v-list-item>
@@ -42,15 +42,20 @@
 
 <script>
 export default {
-    name: "DocumentList",
-    props: ["documents"],
+  name: 'DocumentList',
+  props: ['documents'],
     methods: {
         addDocument() {
-            this.$emit("add-document");
+            const newDocument = {
+                id: Date.now(),
+                title: "New Document",
+                creationDate: new Date().toLocaleString(), // Użyj toLocaleString() zamiast toLocaleDateString()
+            };
+            this.$emit("add-document", newDocument);
         },
         deleteDocument(documentId) {
             this.$emit("delete-document", documentId);
-        }
-    }
+        },
+    },
 };
 </script>
