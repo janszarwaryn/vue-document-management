@@ -1,11 +1,29 @@
 <template>
     <v-app>
-        <v-app-bar app color="primary" dark>
-            <v-toolbar-title>Document Management Manager</v-toolbar-title>
+        <v-navigation-drawer app temporary v-model="drawer">
+            <v-list>
+                <v-list-item to="/" exact>
+                    <v-list-item-title>Main</v-list-item-title>
+                </v-list-item>
+                <v-list-item to="/recycle-bin">
+                    <v-list-item-title>Document basket</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
+
+        <v-app-bar app color="primary" dark clipped-left shrink-on-scroll height="64">
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-toolbar-title>Document Management</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn text to="/">Main</v-btn>
-            <v-btn text to="/recycle-bin">Document basket</v-btn>
+            <v-btn class="d-none d-md-inline-block ma-auto pt-3 mr-5" text to="/">
+                Main
+            </v-btn>
+            <v-btn class="d-none d-md-inline-block ma-auto pt-3" text to="/recycle-bin">
+                Document basket
+            </v-btn>
+
         </v-app-bar>
+
         <v-main>
             <router-view
                 :documents="sortedDocuments"
@@ -35,14 +53,9 @@ export default {
     computed: {
         ...mapState(['documents', 'recycledDocuments']),
         sortedDocuments() {
-            return this.documents
+            return this.$store.state.documents
                 .filter((document) => document && document.title)
-                .sort((a, b) => {
-                    if (!a.title || !b.title) {
-                        return 0;
-                    }
-                    return a.title.localeCompare(b.title);
-                });
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
         },
     },
     methods: {
@@ -66,6 +79,7 @@ export default {
     },
     data() {
         return {
+            drawer: false,
             dialog: false,
             selectedDocumentId: null,
         };
@@ -93,3 +107,22 @@ export default {
     },
 };
 </script>
+
+<style>
+.d-none {
+    display: none ;
+}
+
+.d-md-inline-block {
+    display: inline-block;
+}
+
+@media (min-width: 768px) {
+    .d-md-inline-block {
+        display: inline-block ;
+    }
+    .d-none.d-md-inline-block {
+        display: inline-block ;
+}}
+
+</style>

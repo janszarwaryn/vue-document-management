@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # vue-document-menager
 # Project Goal
 

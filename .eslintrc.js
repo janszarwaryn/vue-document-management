@@ -22,6 +22,8 @@ module.exports = {
         'indent': 'off',
         "quotes": "off",
         "object-curly-newline": "off",
+        "no-undef": "off",
+        "no-multiple-empty-lines": "off",
     },
     settings: {
         'import/resolver': {

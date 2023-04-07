@@ -3,6 +3,19 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+function getCurrentDateTime() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+  const day = now.getDate().toString().padStart(2, '0');
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+
 async function fetchDocuments() {
   // Pobierz dokumenty z API
   return [
@@ -18,11 +31,17 @@ async function fetchRecycledDocuments() {
   ];
 }
 
-async function addDocumentToAPI(document) {
+async function addDocumentToAPI(document, numberOfDocuments) {
   // Dodaj dokument do API i zaktualizuj dane w odpowiedni sposób
   // Zwróć dodany dokument
-  return { ...document, id: Math.floor(Math.random() * 10000) };
+  return {
+    ...document,
+    title: `Document ${numberOfDocuments + 1}`,
+    id: Math.floor(Math.random() * 10000),
+    date: getCurrentDateTime(),
+  };
 }
+
 
 export default new Vuex.Store({
   state: {
@@ -58,6 +77,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
+
     async fetchDocuments({ commit }) {
       const documents = await fetchDocuments();
       commit("setDocuments", documents);
@@ -66,8 +86,8 @@ export default new Vuex.Store({
       const recycledDocuments = await fetchRecycledDocuments();
       commit("setRecycledDocuments", recycledDocuments);
     },
-    async addDocument({ commit }, document) {
-      const addedDocument = await addDocumentToAPI(document);
+    async addDocument({ commit, state }, document) {
+      const addedDocument = await addDocumentToAPI(document, state.documents.length);
       commit("addDocument", addedDocument);
     },
     deleteDocument({ commit }, documentId) {
