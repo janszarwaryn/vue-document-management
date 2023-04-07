@@ -18,15 +18,10 @@ async function fetchRecycledDocuments() {
   ];
 }
 
-function getCurrentDateTime() {
-  const now = new Date();
-  return now.toLocaleString();
-}
-
 async function addDocumentToAPI(document) {
   // Dodaj dokument do API i zaktualizuj dane w odpowiedni sposób
   // Zwróć dodany dokument
-  return { ...document, id: Math.floor(Math.random() * 10000), date: getCurrentDateTime() };
+  return { ...document, id: Math.floor(Math.random() * 10000) };
 }
 
 export default new Vuex.Store({

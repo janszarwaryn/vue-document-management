@@ -14,47 +14,47 @@
 
 <script>
 export default {
-    props: {
-        value: {
-            type: Boolean,
-            default: false
-        },
-        title: {
-            type: String,
-            default: "Usuwanie Dokumentu"
-        },
-        message: {
-            type: String,
-            default: "Jesteś pewien że chcesz to usunąć ten element?"
-        },
-        cancelText: {
-            type: String,
-            default: "Anuluj"
-        },
-        confirmText: {
-            type: String,
-            default: "Potwierdzam"
-        }
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
     },
-    computed: {
-        dialog: {
-            get() {
-                return this.value;
-            },
-            set(val) {
-                this.$emit("input", val);
-            }
-        }
+    title: {
+      type: String,
+      default: 'Deleting a Document',
     },
-    methods: {
-        cancel() {
-            this.$emit("cancel");
-            this.dialog = false;
-        },
-        confirm() {
-            this.$emit("confirm");
-            this.dialog = false;
-        }
-    }
+    message: {
+      type: String,
+      default: 'Are you sure you want to remove this item?',
+    },
+    cancelText: {
+      type: String,
+      default: 'Cancel',
+    },
+    confirmText: {
+      type: String,
+      default: 'Confirm',
+    },
+  },
+  computed: {
+    dialog: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit('input', val);
+      },
+    },
+  },
+  methods: {
+    cancel() {
+      this.$emit('cancel');
+      this.dialog = false;
+    },
+    confirm() {
+      this.$emit('confirm');
+      this.dialog = false;
+    },
+  },
 };
 </script>
