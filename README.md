@@ -14,6 +14,7 @@ The goal of the project is to create a document management system that allows fo
 
 -   The application should work on different web browsers
 -   The application should be responsive and adapt to different screen sizes
+-   U can easily test the application by Jest framework
 -   Security: Users should only have access to documents after reload site
 
 
@@ -42,6 +43,11 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+```
+
+### Starts the Testing
+```
+npm run test:unit
 ```
 
 ### Compiles and minifies for production
