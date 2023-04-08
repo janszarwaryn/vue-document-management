@@ -30,8 +30,8 @@ The user can delete a document from the system.
 
 ## Summary:
 
-The project allowed us to create a document management system that is easy to use and enables adding, deleting documents. The project was implemented using the Vue.js framework and the UX/UI library Vuetify.
-=======
+- The project allowed us to create a document management system that is easy to use and enables adding, deleting documents. The project was implemented using the Vue.js framework and the UX/UI library Vuetify."
+
 # vue-web-app
 
 
