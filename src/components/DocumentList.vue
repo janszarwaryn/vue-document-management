@@ -33,7 +33,6 @@
                         </template>
                         <span>Delete Document</span>
                     </v-tooltip>
-                </v-list-item-action>
             </v-list-item>
         </v-list>
     </div>

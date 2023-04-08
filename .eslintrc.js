@@ -24,6 +24,7 @@ module.exports = {
         "object-curly-newline": "off",
         "no-undef": "off",
         "no-multiple-empty-lines": "off",
+        "vue/no-parsing-error": "off",
     },
     settings: {
         'import/resolver': {
