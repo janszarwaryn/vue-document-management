@@ -12,16 +12,8 @@
         </v-navigation-drawer>
 
         <v-app-bar app color="primary" dark clipped-left shrink-on-scroll height="64">
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon class="mt-2" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>Document Management</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn class="d-none d-md-inline-block ma-auto pt-3 mr-5" text to="/">
-                Main
-            </v-btn>
-            <v-btn class="d-none d-md-inline-block ma-auto pt-3" text to="/recycle-bin">
-                Document basket
-            </v-btn>
-
         </v-app-bar>
 
         <v-main>
