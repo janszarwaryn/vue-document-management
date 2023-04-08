@@ -1,5 +1,5 @@
 // tests/unit/actions.spec.js
-import { actions } from "../src/store";
+import { actions } from "@/store";
 import {
     ADD_DOCUMENT,
     DELETE_DOCUMENT,

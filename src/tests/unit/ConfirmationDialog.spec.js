@@ -1,6 +1,6 @@
 // tests/unit/ConfirmationDialog.spec.js
 import { shallowMount } from '@vue/test-utils';
-import ConfirmationDialog from "../src/components/ConfirmationDialog.vue";
+import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
 
 describe('ConfirmationDialog.vue', () => {
     it('renders confirmation dialog component', () => {

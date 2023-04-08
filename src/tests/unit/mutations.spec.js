@@ -1,5 +1,5 @@
 // tests/unit/mutations.spec.js
-import { mutations } from "../src/store";
+import { mutations } from "@/store";
 import {
     ADD_DOCUMENT,
     DELETE_DOCUMENT,

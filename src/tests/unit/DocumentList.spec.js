@@ -1,6 +1,6 @@
 // tests/unit/DocumentList.spec.js
 import { shallowMount } from '@vue/test-utils';
-import DocumentList from "../src/components/DocumentList.vue";
+import DocumentList from "@/components/DocumentList.vue";
 
 describe('DocumentList.vue', () => {
     it('renders document list component', () => {
